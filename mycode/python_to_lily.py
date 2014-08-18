@@ -1,6 +1,7 @@
 import basic_functions_sightreading as s
 import random
 import subprocess
+import time
 
 class Piano_score(object):
     '''formats the inputs to make a lilypond string'''
@@ -22,7 +23,8 @@ class Piano_score(object):
     def getLilyString(self):
         '''this part's kinda ugly, but whatre ya gonna do
         have to build a big ol string for the lilypond output. this makes it somewhat
-        pretty/viewable'''
+        pretty/viewable. the transpose line is important. everything is written in c
+        and then transposed to a different key later'''
         lilyString = '' 
         lilyString += '\\score {\n'
         lilyString += ' \\new PianoStaff << \n'
@@ -135,9 +137,17 @@ def make_sightreadings(level, numExamples):
 
 if __name__ == '__main__':
     ## make 10 examples of level 1 sightreading and save output to a pdf
-    string = make_sightreadings(1,10)
-    subprocess.call(['touch','newExample.ly'])
-    f = open('newExample.ly','w')
-    subprocess.call(['echo',string], stdout=f)
-    subprocess.call(['lilypond','newExample.ly'])
+    level = 2
+    string = make_sightreadings(level,10)
+    date_addendum = time.asctime()
+    title = 'level_1_august_16_2.ly'
+    subprocess.call(['touch',title])
+    f = open(title,'w')
+    subprocess.call(['echo',string],stdout=f)
+    subprocess.call(['lilypond',title])
+    # title = 'sightreading '+ 'level ' + str(level) + ' ' + date_addendum + '.ly'
+    # subprocess.call(['touch',title])
+    # f = open(title,'w')
+    # subprocess.call(['echo',string], stdout=f)
+    # subprocess.call(['lilypond',title])
     

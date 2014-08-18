@@ -65,7 +65,7 @@ def nextNoteStep(currentScaleDegree, level, pinkyDegree=4):
 
 
 def stepNoteNumsFiveFinger(rhythms, level, pinkyDegree=4):
-    '''takes the rhythms and the levels and creates a list of scale degrees, ending
+    '''takes the rhythms and the level and creates a list of scale degrees, ending
     on the tonic'''
     notes = [0] ## always end on tonic
     for i in range(1,len(rhythms)):
